@@ -4,8 +4,8 @@
   "description": "Note taker app created using Node and Express",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node server/server.js",
+    "nodemon": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
