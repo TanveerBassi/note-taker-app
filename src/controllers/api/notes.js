@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 const getNotes = async (req, res) => {
   try {
     const notes = await getDataFromFile();
+    console.log(notes);
 
     return res.json(notes);
   } catch (error) {
