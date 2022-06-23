@@ -1,1 +1,17 @@
-[{"title":"Welcome","text":"Add your own notes here!","id":"bc51b2fc-f234-11ec-b939-0242ac120002"},{"title":"Update Me!","text":"Click on the pen in the navbar to edit.","id":"bc51b4d2-f234-11ec-b939-0242ac120002"},{"title":"Delete me!","text":":)","id":"bc51b6a8-f234-11ec-b939-0242ac120002"},{"id":"e4b661b8-8642-48b1-8cf9-1109ce494dca","title":"sdfg","text":"sd"},{"id":"47955596-abf8-4dd9-a922-d17fc6bf0528","title":"sadf","text":"sdad"},{"id":"53a95334-74c5-48d0-bacd-a9733c40e4c7","title":"safsdf","text":"sdadas"}]
+[
+  {
+    "title": "Welcome",
+    "text": "Add your own notes here!",
+    "id": "bc51b2fc-f234-11ec-b939-0242ac120002"
+  },
+  {
+    "title": "Update Me!",
+    "text": "Click on the pen in the navbar to edit.",
+    "id": "bc51b4d2-f234-11ec-b939-0242ac120002"
+  },
+  {
+    "title": "Delete me!",
+    "text": ":)",
+    "id": "bc51b6a8-f234-11ec-b939-0242ac120002"
+  }
+]
