@@ -1,66 +1,68 @@
+const fs = require("fs");
+const path = require("path");
+
 const { getDataFromFile, writeDataToFile } = require("../../utils");
 
 const { v4: uuidv4 } = require("uuid");
 
-const getNotes = async (req, res) => {
-  try {
-    const notes = await getDataFromFile();
-    console.log(notes);
-
-    return res.json(notes);
-  } catch (error) {
-    console.error(error.message);
-
-    res.status(500).json({ error: "Something went wrong" });
-  }
+// controller fn to get notes
+const getNotes = (req, res) => {
+  // read from data file
+  const notes = getDataFromFile();
+  // return all notes data
+  return res.json(notes);
 };
 
-const createNotes = (req, res) => {
-  const validKeys = ["title", "text"];
-  const payload = req.body;
-
-  const isValid = validKeys.every((key) => Object.keys(payload).includes(key));
-
-  if (isValid) {
-    const newNote = {
-      id: uuidv4(),
-      ...payload,
-    };
-
-    const notes = getDataFromFile();
-
-    notes.push(newNote);
-
-    writeDataToFile(JSON.stringify(notes));
-
-    return res.json(newNote);
-  }
-
-  return res.status(400).json({ message: "Please read our documentation" });
-};
-
+// controller fn to delete notes
 const deleteNotes = (req, res) => {
+  // get id from request params
   const { id } = req.params;
 
-  const notes = getDataFromFile();
+  // get notes from file
+  const notesData = getDataFromFile();
 
-  const note = notes.find((note) => note.id === id);
+  // filter array and remove note from array
+  const filteredNotes = notesData.filter((note) => note.id !== id);
 
-  if (!notes) {
-    return res.status(404).json({
-      message: `No note with id: ${id}`,
-    });
-  }
+  // write back to data file
+  writeDataToFile(filteredNotes);
 
-  const newNotes = notes.filter((note) => note.id !== id);
-
-  writeDataToFile(JSON.stringify(newNotes));
-
-  return res.json(newNotes);
+  // return response
+  return res.json(notesData);
 };
 
+// controller fn to create notes
+const createNotes = (req, res) => {
+  console.log(req.body);
+  // add post body request
+  const { title, text } = req.body;
+
+  // create id for each new note
+  const id = uuidv4();
+
+  // create a payload for new notes
+  const note = {
+    id,
+    title,
+    text,
+  };
+
+  // get notes from file
+  let notesData = getDataFromFile();
+
+  // push to array
+  notesData.push(note);
+
+  // write back to file
+  writeDataToFile(notesData);
+
+  // return response
+  return res.json(notesData);
+};
+
+// export functions
 module.exports = {
   getNotes,
-  createNotes,
   deleteNotes,
+  createNotes,
 };
